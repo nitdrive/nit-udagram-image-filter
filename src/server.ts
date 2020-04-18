@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
+import { requireAuth } from './auth.router';
 
 (async () => {
 
@@ -13,13 +14,20 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   // Use the body parser middleware for post requests
   app.use(bodyParser.json());
 
+  //CORS Should be restricted
+  app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:8100");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    next();
+  });
+
   // Root Endpoint.
   // Displays a simple message to the user
   app.get( "/", async ( req, res ) => {
     res.send("try GET /filteredimage?image_url={{}}")
-  } );
+  });
 
-  app.get( "/filteredimage", async ( req, res ) => {
+  app.get( "/filteredimage", requireAuth, async ( req, res ) => {
       const image_url: string = req.query.image_url;
       
       //1). Validate the image_url query.
@@ -28,7 +36,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
         res.send('Image url cannot be empty');
       } else {
         //2). Call filterImageFromURL(image_url) to filter the image.
-        const tempPath: string = await filterImageFromURL(image_url);
+        const tempPath: string = await filterImageFromURL(decodeURIComponent(image_url));
   
         if(!tempPath) {
           res.status(422);
