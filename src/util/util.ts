@@ -12,10 +12,7 @@ export async function filterImageFromURL(inputURL: string): Promise<string>{
    
     const result:string = await new Promise( async (resolve) => {
         try{
-            const photo = await Jimp.read(inputURL, function (response) {
-                console.log("ERROR FROM JIMP");
-                console.log(response);
-            });
+            const photo = await Jimp.read(inputURL);
             const outpath = '/tmp/filtered.'+Math.floor(Math.random() * 2000)+'.jpg';
             await photo
             .resize(256, 356) // resize
@@ -26,6 +23,28 @@ export async function filterImageFromURL(inputURL: string): Promise<string>{
             });
         } catch(e) {
             console.log("Jimp.read error for url:" + inputURL);
+            console.log(e);
+            resolve(null);
+        }
+    });
+    return result;
+}
+
+export async function filterImageFromFile(inputBuffer: Buffer): Promise<string>{
+   
+    const result:string = await new Promise( async (resolve) => {
+        try{
+            const photo = await Jimp.read(inputBuffer);
+            const outpath = '/tmp/filtered.'+Math.floor(Math.random() * 2000)+'.jpg';
+            await photo
+            .resize(256, 356) // resize
+            .quality(60) // set JPEG quality
+            .greyscale() // set greyscale
+            .write(__dirname+outpath, (img)=>{
+                resolve(__dirname+outpath);
+            });
+        } catch(e) {
+            console.log("Jimp.read error");
             console.log(e);
             resolve(null);
         }
