@@ -31,7 +31,7 @@ import { config } from './config/config';
     res.send("try GET /filteredimage?image_url={{}}")
   });
 
-  app.get( "/filteredimage", requireAuth, async ( req, res ) => {
+  app.get( "/filteredimage", async ( req, res ) => {
       const image_url: string = req.query.image_url;
       
       // Validate the image_url query.
@@ -55,7 +55,7 @@ import { config } from './config/config';
         const signedUrl = AWS.getPutSignedUrl(filteredUrl);
         try{
           const data = await new Promise((resolve, reject) => {
-
+            
             // Read the temp file from disk.
             fs.readFile(tempPath, function(err, data){
               if(err) {
