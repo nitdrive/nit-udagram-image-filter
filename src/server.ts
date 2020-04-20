@@ -32,7 +32,7 @@ var upload = multer();
     res.send("try GET /filteredimage?image_url={{}}")
   });
 
-  app.get( "/filteredimage", requireAuth, async ( req, res ) => {
+  app.get( "/filteredimage", async ( req, res ) => {
       const image_url: string = req.query.image_url;
       
       //1). Validate the image_url query.
