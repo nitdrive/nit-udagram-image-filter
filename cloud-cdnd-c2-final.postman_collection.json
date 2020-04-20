@@ -6,17 +6,17 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:8082/filteredimage?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
+			"name": "http://image-filter-service.greetings-time.com/filteredimage?image_url=https://homepages.cae.wisc.edu/~ece533/images/fruits.png",
 			"request": {
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJlZEBnbWFpbC5jb20iLCJwYXNzd29yZF9oYXNoIjoiJDJiJDEwJHgzb2VZRUdKLnpOc1BXeVNLNGNncE85RndYcFdCTE1EbGR3U1hobmIvczlJa2xuelBBTlNpIiwiY3JlYXRlZEF0IjoiMjAyMC0wNC0xN1QwMjo1ODowMC45MTBaIiwidXBkYXRlZEF0IjoiMjAyMC0wNC0xN1QwMjo1ODowMC45MTBaIiwiaWF0IjoxNTg3MTg0NjU4fQ.1F_fTE_0NJooBhztgDecyrT7T9AVi0RTalH6D-Ysuoc"
+						"value": "jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJlZEBnbWFpbC5jb20iLCJwYXNzd29yZF9oYXNoIjoiJDJiJDEwJHgzb2VZRUdKLnpOc1BXeVNLNGNncE85RndYcFdCTE1EbGR3U1hobmIvczlJa2xuelBBTlNpIiwiY3JlYXRlZEF0IjoiMjAyMC0wNC0xN1QwMjo1ODowMC45MTBaIiwidXBkYXRlZEF0IjoiMjAyMC0wNC0xN1QwMjo1ODowMC45MTBaIiwiaWF0IjoxNTg3MzkzNDE1fQ.ytykSDL_2BW_hAM-jqqiBQgVWcWlcGR2o6PFVvkoH-U"
 					}
 				],
 				"url": {
-					"raw": "http://{{HOST}}/filteredimage?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
+					"raw": "http://{{HOST}}/filteredimage?image_url=https://homepages.cae.wisc.edu/~ece533/images/fruits.png",
 					"protocol": "http",
 					"host": [
 						"{{HOST}}"
@@ -27,7 +27,7 @@
 					"query": [
 						{
 							"key": "image_url",
-							"value": "https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg"
+							"value": "https://homepages.cae.wisc.edu/~ece533/images/fruits.png"
 						}
 					]
 				}
@@ -61,7 +61,7 @@
 		{
 			"id": "1df3d31a-de30-494b-a3d0-f1228dd8713c",
 			"key": "HOST",
-			"value": "localhost:8082",
+			"value": "http://image-filter-service.greetings-time.com",
 			"type": "string"
 		}
 	]
