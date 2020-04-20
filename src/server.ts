@@ -62,7 +62,7 @@ var upload = multer();
       }
   });
 
-  app.post( "/filtered-image-from-file", requireAuth, async ( req, res ) => {
+  app.post( "/filtered-image-from-file", async ( req, res ) => {
     const image_url: string = req.query.image_url;
     
     //1). Validate the image_url query.
