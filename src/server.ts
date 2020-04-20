@@ -73,7 +73,7 @@ import { config } from './config/config';
         } catch(e) {
           console.log(e);
           res.status(500);
-          res.send("Could upload the image: "+ image_url);
+          res.send("Could not upload the image to S3: "+ image_url);
         }
   
         // On finish delete local files.
