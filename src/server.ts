@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import {filterImageFromURL, deleteLocalFiles, filterImageFromFile} from './util/util';
+import {filterImageFromURL, deleteLocalFiles} from './util/util';
 import { requireAuth } from './auth.router';
 import * as AWS from './aws';
 import axios from 'axios';
@@ -31,7 +31,7 @@ import { config } from './config/config';
     res.send("try GET /filteredimage?image_url={{}}")
   });
 
-  app.get( "/filteredimage", async ( req, res ) => {
+  app.get( "/filteredimage", requireAuth, async ( req, res ) => {
       const image_url: string = req.query.image_url;
       
       // Validate the image_url query.
