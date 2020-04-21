@@ -93,7 +93,7 @@ import { config } from './config/config';
       }
   });
 
-  app.get( "/filteredimage", async ( req, res ) => {
+  app.get( "/filteredimage", requireAuth, async ( req, res ) => {
     const image_url: string = req.query.image_url;
       
     // Validate the image_url query.
