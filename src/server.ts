@@ -30,7 +30,7 @@ import { config } from './config/config';
     res.send("try GET /filteredimage?image_url={{}}")
   });
 
-  app.get( "/filteredimage", requireAuth, async ( req, res ) => {
+  app.get( "/filtered-image-from-file", requireAuth, async ( req, res ) => {
       const image_url: string = req.query.image_url;
       let imageData;
         
@@ -92,6 +92,38 @@ import { config } from './config/config';
         } 
       }
   });
+
+  app.get( "/filteredimage", async ( req, res ) => {
+    const image_url: string = req.query.image_url;
+      
+    // Validate the image_url query.
+    if(!image_url) {
+      res.status(400);
+      res.send('Image url cannot be empty');
+      res.end();
+    } else {
+      // Call filterImageFromURL(image_url) to filter the image.
+      const tempPath: string = await filterImageFromURL(image_url);
+
+      if(!tempPath) {
+        res.status(422);
+        res.send("Could not process image with url: "+ image_url);
+        res.end();
+      } else {
+        // Get a S3 put URL for the filter image.
+        res.sendFile(tempPath);
+
+        // On finish delete local files.
+        res.on('finish', function() {
+          try {
+            deleteLocalFiles([tempPath]);
+          } catch(e) {
+            console.log("Could not remove file at: "+ tempPath);
+          }
+        });
+      } 
+    }
+});
 
   app.get('/signed-url/:fileName', async (req, res) => {
     let { fileName } = req.params;
