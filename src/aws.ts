@@ -12,7 +12,8 @@ if(c.aws_profile !== 'DEPLOYED') {
 export const s3 = new AWS.S3({
   signatureVersion: 'v4',
   region: c.aws_region,
-  params: {Bucket: c.aws_media_bucket}
+  params: {Bucket: c.aws_media_bucket},
+  
 });
 
 
@@ -52,4 +53,23 @@ export function getPutSignedUrl( key: string ){
     });
 
     return url;
+}
+
+export async function getObject( key: string ): Promise<any>  {
+  const params = {
+    Bucket: c.aws_media_bucket,
+    Key: key
+  };
+  const res = await s3.getObject(params).promise();
+  return res;
+}
+
+export async function putObject( key: string, data: any ): Promise<any>  {
+  const params = {
+    Bucket: c.aws_media_bucket,
+    Key: key,
+    Body: data
+  };
+  const res = await s3.putObject(params).promise();
+  return res;
 }
