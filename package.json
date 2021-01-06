@@ -34,7 +34,7 @@
   "dependencies": {
     "@types/jsonwebtoken": "^8.3.2",
     "aws-sdk": "^2.658.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "express": "^4.17.1",
     "jimp": "^0.10.2",
     "jsonwebtoken": "^8.5.1"
